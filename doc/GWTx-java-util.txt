@@ -6,7 +6,7 @@ Dependencies: none
 
 Module XML:
 
-<inherits name="com.googlecode.gwtx.java.Util"/> :
+<inherits name="gwtx.java.Util"/> :
     This inherits the java.util emulation lib for use in your project.
 
 License: Apache License, Version 2.0

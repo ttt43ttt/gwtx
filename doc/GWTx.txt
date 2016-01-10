@@ -6,21 +6,21 @@ Dependencies: none
 
 Module XML:
 
-<inherits name="com.googlecode.gwtx.Java"/> :
+<inherits name="gwtx.Java"/> :
     This inherits all of emulation lib for use in your project.
 
 or any of:
 
-<inherits name="com.googlecode.gwtx.java.Beans"/> :
+<inherits name="gwtx.java.Beans"/> :
     This inherits the java.beans emulation lib for use in your project.
 
-<inherits name="com.googlecode.gwtx.java.Io"/> :
+<inherits name="gwtx.java.Io"/> :
     This inherits the java.io emulation lib for use in your project.
 
-<inherits name="com.googlecode.gwtx.java.Util"/> :
+<inherits name="gwtx.java.Util"/> :
     This inherits the java.util emulation lib for use in your project.
 
-<inherits name="com.googlecode.gwtx.java.util.Logging"/> :
+<inherits name="gwtx.java.util.Logging"/> :
     This inherits the java.util.logging emulation lib for use in your project.
 
 License: Apache License, Version 2.0

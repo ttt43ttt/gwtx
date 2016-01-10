@@ -8,7 +8,7 @@ Dependencies:
 
 Module XML:
 
-<inherits name="com.googlecode.gwtx.java.Beans"/> :
+<inherits name="gwtx.java.Beans"/> :
     This inherits the java.beans emulation lib for use in your project.
 
 License: Apache License, Version 2.0

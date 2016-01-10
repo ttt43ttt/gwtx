@@ -9,7 +9,7 @@ Dependencies:
 
 Module XML:
 
-<inherits name="com.googlecode.gwtx.java.util.Logging"/> :
+<inherits name="gwtx.java.util.Logging"/> :
     This inherits the java.util.logging emulation lib for use in your project.
 
 License: Apache License, Version 2.0
