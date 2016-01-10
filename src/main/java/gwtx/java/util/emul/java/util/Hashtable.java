@@ -20,6 +20,10 @@ public class Hashtable<K, V> extends HashMap<K, V> {
         super(t);
     }
 
+    public synchronized boolean contains(Object value) {
+        return super.containsValue(value);
+    }
+
     public synchronized Enumeration<V> elements() {
         Iterator<V> it = super.values().iterator();
         return new Enumerator<V>(it);
