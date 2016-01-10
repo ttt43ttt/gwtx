@@ -18,17 +18,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.google.code.gwtx</groupId>
+  <groupId>com.wilson</groupId>
   <artifactId>gwtx</artifactId>
-  <version>1.5.4-SNAPSHOT</version>
+  <version>2.7.0-SNAPSHOT</version>
   <name>gwtx</name>
   <description>
     The goal of GWTx is to provide drop in support for an extended
     set of the of the standard Java library classes on top of what
     is provided by the GWT distribution provided by Google
   </description>
-
-  <url>http://code.google.com/p/gwtx/</url>
+  
   <licenses>
     <license>
       <name>Apache License 2.0</name>
@@ -37,26 +36,16 @@
     </license>
   </licenses>
 
-  <developers>
-    <developer>
-      <name>Sandy McArthur</name>
-      <email>sandymac@gmail.com</email>
-    </developer>
-    <developer>
-      <name>Nicolas De loof</name>
-      <email>nicolas.deloof@gmail.com</email>
-    </developer>
-  </developers>
-
   <properties>
-    <gwt.version>1.5.3</gwt.version>
-  </properties>
+    <!-- Convenience property to set the GWT version -->
+    <gwtVersion>2.7.0</gwtVersion>
 
-  <scm>
-    <connection>scm:svn:http://gwtx.googlecode.com/svn/trunk</connection>
-    <developerConnection>scm:svn:https://gwtx.googlecode.com/svn/trunk</developerConnection>
-    <url>http://code.google.com/p/gwtx/source/browse/</url>
-  </scm>
+    <!-- GWT needs at least java 1.6 -->
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
 
   <build>
     <resources>
@@ -73,9 +62,8 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
           <excludes>
             <exclude>**/client/**/*.java</exclude>
             <exclude>**/emul/**/*.java</exclude>
@@ -84,69 +72,36 @@
       </plugin>
     </plugins>
   </build>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.google.gwt</groupId>
+        <artifactId>gwt</artifactId>
+        <version>${gwtVersion}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>${gwt.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-dev</artifactId>
-      <version>${gwt.version}</version>
-      <classifier>${gwt.variant}</classifier>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.2</version>
+      <version>4.11</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
-  <profiles>
-    <profile>
-      <id>mac</id>
-      <activation>
-        <os>
-          <family>mac</family>
-        </os>
-      </activation>
-      <properties>
-        <gwt.variant>mac</gwt.variant>
-      </properties>
-    </profile>
-    <profile>
-      <id>linux</id>
-      <activation>
-        <os>
-          <family>unix</family>
-        </os>
-      </activation>
-      <properties>
-        <gwt.variant>linux</gwt.variant>
-      </properties>
-    </profile>
-    <profile>
-      <id>windows</id>
-      <activation>
-        <os>
-          <family>windows</family>
-        </os>
-      </activation>
-      <properties>
-        <gwt.variant>windows</gwt.variant>
-      </properties>
-    </profile>
-  </profiles>
-
-  <distributionManagement>
-    <repository>
-      <id>people.apache.org</id>
-      <url>scp://people.apache.org/home/nicolas/rsync-to-central/</url>
-    </repository>
-  </distributionManagement>
-
+  
 </project>
