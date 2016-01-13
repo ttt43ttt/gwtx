@@ -18,16 +18,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.wilson</groupId>
+  <groupId>com.github.ttt43ttt</groupId>
   <artifactId>gwtx</artifactId>
   <version>2.7.0-SNAPSHOT</version>
-  <name>gwtx</name>
+  <packaging>jar</packaging>
+
+  <name>GWTx</name>
   <description>
     The goal of GWTx is to provide drop in support for an extended
     set of the of the standard Java library classes on top of what
     is provided by the GWT distribution provided by Google
   </description>
-  
+  <url>https://github.com/ttt43ttt/gwtx</url>
+
   <licenses>
     <license>
       <name>Apache License 2.0</name>
@@ -35,6 +38,17 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+  <developers>
+    <developer>
+      <name>Wilson Tian</name>
+      <email>ttt43ttt@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git@github.com:ttt43ttt/gwtx.git</connection>
+    <developerConnection>scm:git:git@github.com:ttt43ttt/gwtx.git</developerConnection>
+    <url>git@github.com:ttt43ttt/gwtx.git</url>
+  </scm>
 
   <properties>
     <!-- Convenience property to set the GWT version -->
@@ -47,32 +61,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/emul/**/*.java</include>
-          <include>**/client/**/*.java</include>
-          <include>**/*.gwt.xml</include>
-          <include>**/*.properties</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <excludes>
-            <exclude>**/client/**/*.java</exclude>
-            <exclude>**/emul/**/*.java</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -103,5 +91,106 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <includes>
+          <include>**/emul/**/*.java</include>
+          <include>**/client/**/*.java</include>
+          <include>**/*.gwt.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.3</version>
+        <configuration>
+          <excludes>
+            <exclude>**/client/**/*.java</exclude>
+            <exclude>**/emul/**/*.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>2.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <failOnError>false</failOnError>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.3</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
